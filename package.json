@@ -47,7 +47,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://github.com/the-unit/unit-renewal",
+  "homepage": "https://the-unit.github.io/unit-renewal",
   "devDependencies": {
     "@types/styled-components": "^5.0.1",
     "prettier": "2.0.2"
