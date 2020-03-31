@@ -4,7 +4,6 @@ import Header from '../Components/header';
 import Banner from '../Components/banner';
 import styled from 'styled-components';
 
-
 const FlexContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -19,8 +18,8 @@ const App = () => {
   return (
     <FlexContainer>
       <MaxWidthContainer>
-        <Header/>
-        <Banner/>
+        <Header />
+        <Banner />
       </MaxWidthContainer>
     </FlexContainer>
   );

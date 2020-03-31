@@ -5,9 +5,13 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import API from '../Global/api';
 
 const client = new ApolloClient({
-  uri: `${API.END_POINT}:${API.PORT}/graphql`
+  uri: `${API.END_POINT}:${API.PORT}/graphql`,
 });
 
 export default function Index() {
-  return <ApolloProvider client={client}><App/></ApolloProvider>;
+  return (
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
 }
