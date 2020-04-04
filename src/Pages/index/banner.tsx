@@ -2,7 +2,8 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import styled from 'styled-components';
-import API from '../Global/api';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Color from '../../Styles/cololr';
 
 interface LandingPage {
   landingPage: {
@@ -42,7 +43,25 @@ const LANDING_PAGE = gql`
 const Banner = () => {
   const { loading, error, data } = useQuery<LandingPage>(LANDING_PAGE);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <SkeletonTheme color={Color.TREE_GREEN} highlightColor={'rgba(255, 255, 255, 0.2)'}>
+        <div
+          style={{
+            height: '360px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ marginBottom: '6px' }}>
+            <Skeleton width={320} height={60} />
+          </div>
+          <Skeleton width={320} height={29} />
+        </div>
+      </SkeletonTheme>
+    );
   if (error) return <p>Error :(</p>;
 
   return (
@@ -54,9 +73,7 @@ const Banner = () => {
           height: '360px',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
-          backgroundImage: `url(${
-            API.END_POINT + ':' + API.PORT + data?.landingPage.image.url
-          })`,
+          backgroundImage: `url(${data?.landingPage.image.url})`,
         }}
       >
         <ImageContainer>

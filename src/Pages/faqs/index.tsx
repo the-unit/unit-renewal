@@ -8,7 +8,7 @@ interface FAQ {
   description2: string;
 }
 
-interface FAQS {
+interface Index {
   faqs: FAQ[];
 }
 
@@ -23,7 +23,7 @@ const FAQ_LIST = gql`
 `;
 
 export default function FAQS() {
-  const { loading, error, data } = useQuery<FAQS>(FAQ_LIST);
+  const { loading, error, data } = useQuery<Index>(FAQ_LIST);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
