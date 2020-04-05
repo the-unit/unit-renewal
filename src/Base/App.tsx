@@ -26,7 +26,7 @@ const MaxWidthContainer = styled.div`
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Router basename="/">
+      <Router basename="/unit-renewal">
         <FlexContainer>
           <MaxWidthContainer>
             <Header />
