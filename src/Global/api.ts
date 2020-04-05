@@ -1,4 +1,3 @@
 export default class API {
-  public static readonly END_POINT = 'http://localhost';
-  public static readonly PORT = 1337;
+  public static readonly END_POINT = 'https://unit-273303.appspot.com';
 }

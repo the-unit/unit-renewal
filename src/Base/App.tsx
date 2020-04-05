@@ -10,7 +10,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import API from '../Global/api';
 
 const client = new ApolloClient({
-  uri: `${API.END_POINT}:${API.PORT}/graphql`,
+  uri: `${API.END_POINT}/graphql`,
 });
 
 const FlexContainer = styled.div`
