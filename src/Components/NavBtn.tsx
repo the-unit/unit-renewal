@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
+import Color from '../Styles/cololr';
+import { Nav } from 'react-bootstrap';
 
 const NavBtnContainer = styled.div<INavContainer>`
   margin-left: 28px;
@@ -10,12 +12,12 @@ const NavBtnContainer = styled.div<INavContainer>`
   text-align: center;
   font-weight: bold;
   min-width: 90px;
-  height: 60px;
   &:hover {
     background-color: ${(props) => props.hovercolor};
   }
   @media screen and (max-width: 864px) {
-    width: 100%;
+    margin: 0;
+    background-color: ${() => Color.TREE_GREEN};
   }
   padding: 20px 13px 16px 14px;
 `;
@@ -31,11 +33,11 @@ type INavContainer = {
 };
 
 const NavBtn: React.FC<INavBtn> = ({ to, isHash, hovercolor, children }) => (
-  <NavBtnContainer hovercolor={hovercolor}>
+  <NavBtnContainer hovercolor={hovercolor} data-toggle="collapse" data-target=".navbar-collapse.show">
     {isHash ? (
-      <HashLink to={to}>{children ? children : null}</HashLink>
+      <Nav.Link as={HashLink} to={to} href={`${to}`} className='p-0'>{children ? children : null}</Nav.Link>
     ) : (
-      <Link to={to}>{children ? children : null}</Link>
+      <Nav.Link as={Link} to={to} href={`${to}`} className='p-0'>{children ? children : null}</Nav.Link>
     )}
   </NavBtnContainer>
 );
