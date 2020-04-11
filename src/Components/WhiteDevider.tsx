@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Color from '../Styles/cololr';
+import Color from '../Styles/colors';
 
 interface IDevider {
   back: string;

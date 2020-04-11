@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
-import Color from './../Styles/cololr';
+import Color from '../Styles/colors';
 import NavBtn from '../Components/NavBtn';
 import { Link } from 'react-router-dom';
 
@@ -50,7 +50,12 @@ export default function Header() {
     //     </Nav>
     //   </Navbar.Collapse>
     // </WidthNavbar>
-    <WidthNavbar collapseOnSelect expand="md" className="p-0" color={Color.TREE_GREEN}>
+    <WidthNavbar
+      collapseOnSelect
+      expand="md"
+      className="p-0"
+      color={Color.TREE_GREEN}
+    >
       <Link to={'/'}>
         <Navbar.Brand>
           <Logo src={process.env.PUBLIC_URL + '/logo.png'} alt={'logo'} />

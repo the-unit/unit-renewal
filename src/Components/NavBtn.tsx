@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
-import Color from '../Styles/cololr';
+import Color from '../Styles/colors';
 import { Nav } from 'react-bootstrap';
 
 const NavBtnContainer = styled.div<INavContainer>`
@@ -33,11 +33,19 @@ type INavContainer = {
 };
 
 const NavBtn: React.FC<INavBtn> = ({ to, isHash, hovercolor, children }) => (
-  <NavBtnContainer hovercolor={hovercolor} data-toggle="collapse" data-target=".navbar-collapse.show">
+  <NavBtnContainer
+    hovercolor={hovercolor}
+    data-toggle="collapse"
+    data-target=".navbar-collapse.show"
+  >
     {isHash ? (
-      <Nav.Link as={HashLink} to={to} href={`${to}`} className='p-0'>{children ? children : null}</Nav.Link>
+      <Nav.Link as={HashLink} to={to} href={`${to}`} className="p-0">
+        {children ? children : null}
+      </Nav.Link>
     ) : (
-      <Nav.Link as={Link} to={to} href={`${to}`} className='p-0'>{children ? children : null}</Nav.Link>
+      <Nav.Link as={Link} to={to} href={`${to}`} className="p-0">
+        {children ? children : null}
+      </Nav.Link>
     )}
   </NavBtnContainer>
 );

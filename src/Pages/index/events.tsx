@@ -42,9 +42,9 @@ export default function Events() {
     return (
       <div className="container">
         <div className="row">
-          {
-            [0, 1, 2].map((val, idx) => {
-              return <div
+          {[0, 1, 2].map((val, idx) => {
+            return (
+              <div
                 className="col-12 col-sm-12 col-md-12 col-lg-4"
                 style={{
                   flexDirection: 'column',
@@ -56,15 +56,14 @@ export default function Events() {
                 key={`evt-${idx}`}
               >
                 <div style={{ width: '50%' }}>
-                  <Skeleton/>
+                  <Skeleton />
                 </div>
                 <div style={{ marginTop: '8px', width: '70%' }}>
-                  <Skeleton>
-                  </Skeleton>
+                  <Skeleton></Skeleton>
                 </div>
               </div>
-            })
-          }
+            );
+          })}
         </div>
       </div>
     );
@@ -73,34 +72,36 @@ export default function Events() {
   return (
     <div className="container">
       <div className="row">
-        {
-          data?.landingPage.events.map((evt, idx) => {
-            return (
-              <div
-                className="col-12 col-sm-12 col-md-12 col-lg-4"
-                style={{
-                  height: '120px',
-                  backgroundColor: 'white',
-                  textAlign: 'center',
-                }}
-                key={`evt-${idx}`}
-              >
-            <span
-              style={{ fontSize: '16px', fontWeight: 'bold', color: '#186f25' }}
+        {data?.landingPage.events.map((evt, idx) => {
+          return (
+            <div
+              className="col-12 col-sm-12 col-md-12 col-lg-4"
+              style={{
+                height: '120px',
+                backgroundColor: 'white',
+                textAlign: 'center',
+              }}
+              key={`evt-${idx}`}
             >
-              {evt.title}
-            </span>
-                <br />
-                <div style={{ marginTop: '8px' }}>
-              <span style={{ fontSize: '14px', color: '#aeaeae' }}>
-                {evt.title_kr} | {evt.date}
+              <span
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  color: '#186f25',
+                }}
+              >
+                {evt.title}
               </span>
-                </div>
+              <br />
+              <div style={{ marginTop: '8px' }}>
+                <span style={{ fontSize: '14px', color: '#aeaeae' }}>
+                  {evt.title_kr} | {evt.date}
+                </span>
               </div>
-            );
-          })
-        }
+            </div>
+          );
+        })}
       </div>
     </div>
-  )
+  );
 }

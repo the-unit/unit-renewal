@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import styled from 'styled-components';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import Color from '../../Styles/cololr';
+import Color from '../../Styles/colors';
 
 interface LandingPage {
   landingPage: {
@@ -45,7 +45,10 @@ const Banner = () => {
 
   if (loading)
     return (
-      <SkeletonTheme color={Color.TREE_GREEN} highlightColor={'rgba(255, 255, 255, 0.2)'}>
+      <SkeletonTheme
+        color={Color.TREE_GREEN}
+        highlightColor={'rgba(255, 255, 255, 0.2)'}
+      >
         <div
           style={{
             height: '360px',
