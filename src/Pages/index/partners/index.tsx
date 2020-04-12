@@ -24,30 +24,33 @@ interface IPartner {
   logo?: ILogo;
 }
 
-interface IPartners {
+interface IQueryPartners {
   partners: IPartner[];
 }
 
-const PARTNER_LIST = gql`
-  {
-    partners {
-      name
-      subName
-      introduction
-      slogan
-      establishmentDate
-      facebook
-      homepage
-      location
-      medium
-      email
-      tags
-      logo {
-        url
+function parameterizedQuer(limit: number = 0) {
+  return gql`
+      {
+          partners(limit: ${limit}) {
+              name
+              subName
+              introduction
+              slogan
+              establishmentDate
+              facebook
+              homepage
+              location
+              medium
+              email
+              tags
+              logo {
+                  url
+              }
+          }
       }
-    }
-  }
-`;
+  `;
+}
+
 
 const PartnerCol = styled(Col)`
   display: flex;
@@ -56,8 +59,12 @@ const PartnerCol = styled(Col)`
   height: 191px;
 `;
 
-export default function Partners() {
-  const { loading, error, data } = useQuery<IPartners>(PARTNER_LIST);
+type IPartners = {
+  limit?: number;
+}
+
+const Partners: React.FC<IPartners> = ({children, limit}) => {
+  const { loading, error, data } = useQuery<IQueryPartners>(parameterizedQuer(limit));
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -98,3 +105,5 @@ export default function Partners() {
     </Container>
   );
 }
+
+export default Partners;

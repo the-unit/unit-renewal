@@ -119,7 +119,6 @@ function getYear(yearMonthDay: string) {
   }
 }
 
-// TODO: VALUE를 ENUM (facebook, homepage, medium) 으로 교체
 function renderBtn(title: string, value?: string) {
   if (value) {
     return (
@@ -144,7 +143,6 @@ const Card: React.FC<ICard> = ({
   facebook,
   medium,
 }) => {
-  console.log('logo is', logo);
   return (
     <CardContainer logo={logo}>
       {logo ? (

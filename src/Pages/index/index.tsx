@@ -13,9 +13,9 @@ export default function Index() {
       <WhiteDevider />
       <Events />
       <Divider title={'Partner'} />
-      <Partners />
+      <Partners limit={6}/>
       <Divider title={'Sponsor'} style={{ marginTop: 25 }} />
-      <Sponsors />
+      <Sponsors limit={6}/>
     </div>
   );
 }

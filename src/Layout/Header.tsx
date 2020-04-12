@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
 import Color from '../Styles/colors';
 import NavBtn from '../Components/NavBtn';
@@ -19,37 +19,6 @@ const Logo = styled.img`
 
 export default function Header() {
   return (
-    // <WidthNavbar expand="sm" color={Color.TREE_GREEN} className="p-0" collapseOnSelect={true}>
-    //   <Link to={'/'}>
-    //     <Navbar.Brand>
-    //       <Logo src={process.env.PUBLIC_URL + '/logo.png'} alt={'logo'} />
-    //     </Navbar.Brand>
-    //   </Link>
-    //   <Navbar.Toggle
-    //     aria-controls="basic-navbar-nav"
-    //     style={{
-    //       color: 'white',
-    //       backgroundColor: 'white',
-    //       borderColor: 'white',
-    //     }}
-    //   />
-    //   <Navbar.Collapse id="basic-navbar-nav" style={{ color: 'white' }} >
-    //     <Nav className="ml-auto">
-    //       <NavBtn to="/aboutus" hovercolor={Color.TREE_LIGHT_GREEN}>
-    //         About Us
-    //       </NavBtn>
-    //       <NavBtn to="/partners" hovercolor={Color.TREE_LIGHT_GREEN}>
-    //         Partner
-    //       </NavBtn>
-    //       <NavBtn to="/sponsors" hovercolor={Color.TREE_LIGHT_GREEN}>
-    //         Sponsor
-    //       </NavBtn>
-    //       <NavBtn to="/Contact" hovercolor={Color.TREE_LIGHT_GREEN}>
-    //         Contact
-    //       </NavBtn>
-    //     </Nav>
-    //   </Navbar.Collapse>
-    // </WidthNavbar>
     <WidthNavbar
       collapseOnSelect
       expand="md"

@@ -23,28 +23,30 @@ interface ISponsor {
   logo: ILogo;
 }
 
-interface ISponsors {
+interface IQuerySponsors {
   sponsors: ISponsor[];
 }
 
-const SPONSOR_LIST = gql`
-  {
-    sponsors {
-      name
-      subName
-      introduction
-      slogan
-      establishmentDate
-      homepage
-      location
-      email
-      tags
-      logo {
-        url
+function parameterizedQuery(limit: number = 0) {
+  return gql`
+      {
+          sponsors(limit: ${limit}) {
+              name
+              subName
+              introduction
+              slogan
+              establishmentDate
+              homepage
+              location
+              email
+              tags
+              logo {
+                  url
+              }
+          }
       }
-    }
-  }
-`;
+  `;
+}
 
 const SponsorCol = styled(Col)`
   display: flex;
@@ -53,8 +55,12 @@ const SponsorCol = styled(Col)`
   height: 295px;
 `;
 
-export default function Sponsors() {
-  const { loading, error, data } = useQuery<ISponsors>(SPONSOR_LIST);
+type ISponsors = {
+  limit?: number;
+}
+
+const Sponsors: React.FC<ISponsors> = ({children, limit}) => {
+  const { loading, error, data } = useQuery<IQuerySponsors>(parameterizedQuery(limit));
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -100,3 +106,5 @@ export default function Sponsors() {
     </Container>
   );
 }
+
+export default Sponsors;
