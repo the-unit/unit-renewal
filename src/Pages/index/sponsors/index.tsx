@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Card from '../../../Components/Card';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
+import CardSkeleton from '../../../Components/CardSkeleton';
 
 interface ILogo {
   url: string;
@@ -62,7 +63,7 @@ type ISponsors = {
 const Sponsors: React.FC<ISponsors> = ({children, limit}) => {
   const { loading, error, data } = useQuery<IQuerySponsors>(parameterizedQuery(limit));
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return renderLoading();
   if (error) return <p>Error :(</p>;
 
   return (
@@ -84,11 +85,6 @@ const Sponsors: React.FC<ISponsors> = ({children, limit}) => {
             <SponsorCol
               key={name}
               className={'p-0'}
-              xs={12}
-              sm={6}
-              md={6}
-              lg={4}
-              xl={4}
             >
               <Card
                 since={establishmentDate}
@@ -105,6 +101,24 @@ const Sponsors: React.FC<ISponsors> = ({children, limit}) => {
       </Row>
     </Container>
   );
+}
+
+function renderLoading() {
+  return (
+    <Container>
+      <Row>
+        {[0,1,2,3,4,5].map(
+          (val, idx) => (
+            <SponsorCol key={val} className={'p-0'}>
+              <CardSkeleton
+                logo={true}
+              />
+            </SponsorCol>
+          )
+        )}
+      </Row>
+    </Container>
+  )
 }
 
 export default Sponsors;

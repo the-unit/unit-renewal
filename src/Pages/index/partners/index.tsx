@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Card from '../../../Components/Card';
 import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import CardSkeleton from '../../../Components/CardSkeleton';
 
 interface ILogo {
   url: string;
@@ -66,7 +67,7 @@ type IPartners = {
 const Partners: React.FC<IPartners> = ({children, limit}) => {
   const { loading, error, data } = useQuery<IQueryPartners>(parameterizedQuer(limit));
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return renderLoading();
   if (error) return <p>Error :(</p>;
 
   return (
@@ -104,6 +105,24 @@ const Partners: React.FC<IPartners> = ({children, limit}) => {
       </Row>
     </Container>
   );
+}
+
+function renderLoading() {
+  return (
+    <Container>
+      <Row>
+        {[0,1,2,3,4,5].map(
+          (val, idx) => (
+            <PartnerCol key={val} className={'p-0'}>
+              <CardSkeleton
+                logo={false}
+              />
+            </PartnerCol>
+          )
+        )}
+      </Row>
+    </Container>
+  )
 }
 
 export default Partners;

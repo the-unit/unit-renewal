@@ -21,9 +21,8 @@ const ResponsiveTextContainer = styled.div`
 export default function () {
   return (
     <FooterContainer fluid className={'p-0'}>
-      <Row>
+      <Row noGutters>
         <Col
-          sm={12}
           lg={4}
           style={{
             display: 'flex',
@@ -31,6 +30,7 @@ export default function () {
             justifyContent: 'center',
             height: 120,
           }}
+          className='d-none d-lg-flex'
         >
           <FooterTextContainer>
             <div>Design by QURIAN, Philographer</div>
@@ -39,9 +39,8 @@ export default function () {
             </ResponsiveTextContainer>
           </FooterTextContainer>
         </Col>
-        <Col sm={0} lg={4}></Col>
+        <Col lg={4} className='d-none d-lg-flex'/>
         <Col
-          sm={12}
           lg={4}
           style={{
             display: 'flex',
@@ -49,9 +48,32 @@ export default function () {
             justifyContent: 'center',
             height: 120,
           }}
+          className='d-none d-lg-flex'
         >
           <FooterTextContainer style={{ textAlign: 'center' }}>
             Copyright © UNIT 2020
+          </FooterTextContainer>
+        </Col>
+        <Col
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 120,
+          }}
+          md={12}
+          className='d-flex d-lg-none'
+        >
+          <FooterTextContainer>
+            <ResponsiveTextContainer>
+              Design by QURIAN, Philographer
+            </ResponsiveTextContainer>
+            <ResponsiveTextContainer>
+              contact@unit.center
+            </ResponsiveTextContainer>
+            <ResponsiveTextContainer>
+              Copyright © UNIT 2020
+            </ResponsiveTextContainer>
           </FooterTextContainer>
         </Col>
       </Row>
