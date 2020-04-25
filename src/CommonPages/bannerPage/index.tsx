@@ -27,7 +27,7 @@ const SubFooter = styled.div`
   margin-top: 348px;
 `
 
-const BannerPage: React.FC<IBannerPage> = ({children, title, desc1, desc2, desc3 = '', isEdit= false, hasSearch = false}) => {
+const BannerPage: React.FC<IBannerPage> = ({children, title, desc1, desc2, desc3, isEdit= false, hasSearch = false}) => {
   return (
     <BannerContainer>
       <Banner title={title} desc1={desc1} desc2={desc2} desc3={desc3}/>

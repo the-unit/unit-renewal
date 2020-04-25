@@ -4,6 +4,7 @@ import BannerPage from '../../CommonPages/bannerPage';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import Color from '../../Styles/colors';
+import Skeleton from 'react-loading-skeleton';
 import FAQ from './faq';
 
 interface IFaq {
@@ -52,6 +53,7 @@ const ContactSubTitleContainer = styled.div`
 `;
 
 const SubTitle = styled.div`
+  width: 100%;
   margin-left: 48px;
   font-size: 24px;
   font-weight: bold; 
@@ -63,18 +65,21 @@ const ContactLastCommentContainer = styled.div`
 `
 
 export default function () {
-  const { loading, error, data } = useQuery<IContact>(QueryContact);
+  const { error, data } = useQuery<IContact>(QueryContact);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  return <BannerPage title={data?.contact!.title} desc1={data?.contact!.description1} desc2={data?.contact!.description2}>
+  return <BannerPage title={data?.contact.title || ''} desc1={data?.contact.description1 || ''} desc2={data?.contact.description2 || ''} desc3={undefined}>
     <ContactSubTitleContainer>
       <SubTitle>
-        {data?.contact.subTitle}
+        {
+          (data)? data?.contact.subTitle : <div style={{ fontSize: '32px', width: '100px' }}>
+            <Skeleton/>
+          </div>
+        }
       </SubTitle>
     </ContactSubTitleContainer>
     {
-      data?.contact.faqs.map((item) => <FAQ key={item.title} title={item.title} description1={item.description1} description2={item.description2}/>)
+      (data)? data?.contact.faqs.map((item, idx) => <FAQ key={`faq-${idx}`} title={item.title} description1={item.description1} description2={item.description2}/>) : [0,1,2,3].map((item) => <FAQ key={`faq-${item}`} title={''} description1={''} description2={''} isLoading={true}/>)
     }
     <ContactLastCommentContainer>
       {data?.contact.lastComment1}<br/>

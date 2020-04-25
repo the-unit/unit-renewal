@@ -1,9 +1,36 @@
 import React from 'react';
-import BannerPage from './../../CommonPages/bannerPage'
-import Partners from '../index/partners'
+import BannerPage from './../../CommonPages/bannerPage';
+import Partners from '../index/partners';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
-export default function () {
-  return <BannerPage title={"Partner"} desc1={'다양한 분야에서 활동하는 IT 단체들을 소개합니다.'} desc2={'Sponsor와 보다 쉽게 연결되어,'} desc3={'다양한 기회를 만들고 시너지로 이어지길 바랍니다.'} isEdit={true} hasSearch>
+export default function() {
+  interface IPartnerPage {
+    partnerPage: {
+      title: string;
+      subTitle1: string;
+      subTitle2: string;
+      subTitle3: string;
+    }
+  }
+
+  const QueryPartnerPage = gql`
+      {
+          partnerPage {
+              title,
+              subTitle1,
+              subTitle2,
+              subTitle3
+          }
+      }
+  `;
+  const { error, data } = useQuery<IPartnerPage>(QueryPartnerPage);
+
+  if (error) return <p>Error :(</p>;
+
+  return <BannerPage title={data?.partnerPage.title || ''} desc1={data?.partnerPage.subTitle1 || ''}
+                     desc2={data?.partnerPage.subTitle2 || ''} desc3={data?.partnerPage.subTitle3 || ''} isEdit={true}
+                     hasSearch>
     <Partners/>
-  </BannerPage>
+  </BannerPage>;
 }

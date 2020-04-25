@@ -4,10 +4,16 @@ import BannerPage from './../../CommonPages/bannerPage';
 import { Container, Row, Col } from 'react-bootstrap';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import Skeleton from 'react-loading-skeleton';
 
 const DescriptionContainer = styled.div`
   padding: 28px 48px 24px 48px
-`
+`;
+
+const DescriptionInnerContainer = styled.div`
+  height: 100%;
+  margin-top: 7.5%;
+`;
 
 const DescriptionTitleContainer = styled.div`
   height: 48px;
@@ -20,14 +26,14 @@ const DescriptionDescContainer = styled.div`
   word-break: keep-all;
   font-size: 16px;
   color: #000000;
-`
+`;
 
 const PdfContainer = styled.div`
   margin-top: 16px;
   font-size: 16px;
   font-weight: bold;
   color: #00a300;
-`
+`;
 
 interface Iimage {
   url: string;
@@ -58,7 +64,7 @@ interface IAboutUsPage {
 const QueryAboutUsList = gql`
     {
         aboutUsPage {
-            title,  
+            title,
             description1,
             description2,
             subTitle,
@@ -77,58 +83,89 @@ const QueryAboutUsList = gql`
             }
         }
     }
-`
+`;
 
-function renderSince(yearMonthDay: string) {
-  return `SINCE ${yearMonthDay.split('-')[0]}`
+function renderSince(yearMonthDay?: string) {
+  return `SINCE ${yearMonthDay?.split('-')[0]}`;
 }
 
-export default function() {
-  const { loading, error, data } = useQuery<IAboutUsPage>(QueryAboutUsList);
-  console.log('data is', data);
+type TEvent = {
+  title: string;
+  title_kr: string;
+  description: string;
+  summary: string;
+  date: string;
+  image: Iimage;
+}
 
-  if (loading) return <p>Loading...</p>;
+const renderEvt = (idx: number, event?: TEvent, isLoading?: boolean) => {
+  return (
+    <React.Fragment key={`evt-${idx}`}>
+      <Col xs={{ span: 12, order: 2 * (1 + idx) }} lg={6}>
+        <DescriptionInnerContainer>
+          <DescriptionTitleContainer>
+            {
+              (isLoading) ? <div style={{ fontSize: '31px', width: '95px' }}><Skeleton/></div> : event?.title
+            }
+          </DescriptionTitleContainer>
+          <DescriptionDescContainer>
+            {
+              (isLoading) ? <div style={{ fontSize: '18px', width: '50%' }}><Skeleton/>
+              </div> : `${event?.title_kr} | ${renderSince(event?.date)}`
+            }
+            <br/>
+            {
+              (isLoading) ?
+                <div style={{ fontSize: '18px', width: '100%' }}><Skeleton count={3}/></div> : event?.description
+            }
+          </DescriptionDescContainer>
+        </DescriptionInnerContainer>
+      </Col>
+      <Col xs={{ span: 12, order: 1 + (2 * idx) }} lg={6}>
+        {
+          (isLoading) ?
+            <div style={{ fontSize: '160px', width: '100%', lineHeight: 0.1, padding: '7.5%' }}><Skeleton/></div> :
+            <img src={event?.image.url} alt={event?.title} style={{ width: '100%', padding: '7.5%' }}/>
+        }
+      </Col>
+    </React.Fragment>
+  );
+};
+
+export default function() {
+  const { error, data } = useQuery<IAboutUsPage>(QueryAboutUsList);
+
   if (error) return <p>Error :(</p>;
-  return <BannerPage title={data?.aboutUsPage!.title!} desc1={data?.aboutUsPage!.description1!} desc2={data?.aboutUsPage!.description2!}>
+  return <BannerPage title={data?.aboutUsPage.title || ''} desc1={data?.aboutUsPage.description1 || ''}
+                     desc2={data?.aboutUsPage.description2 || ''} desc3={undefined}>
     <DescriptionContainer>
       <DescriptionTitleContainer>
-        {data?.aboutUsPage!.subTitle!}
+        {
+          (data) ? <span>{data.aboutUsPage.title}</span> :
+            <div style={{ fontSize: '31px', width: '90px' }}><Skeleton/></div>
+        }
       </DescriptionTitleContainer>
       <DescriptionDescContainer>
-        {data?.aboutUsPage!.subDescription!}
+        {
+          (data) ? <span>{data.aboutUsPage.subDescription}</span> :
+            <div style={{ fontSize: '16px', width: '100%' }}><Skeleton count={4}/></div>
+        }
       </DescriptionDescContainer>
       <PdfContainer>
-        * UNIT 단체소개서.pdf
+        {
+          <span>{'* UNIT 단체소개서.pdf'}</span>
+        }
       </PdfContainer>
     </DescriptionContainer>
     <Container className={'p-0'} style={{ maxWidth: 'inherit' }}>
       <DescriptionContainer>
         <Row>
-          {/*<Col md={{ span: 6, order: 2}}>*/}
-          {/*  A*/}
-          {/*</Col>*/}
-          {/*<Col md={{ span: 6, order: 1}}>*/}
-          {/*  B*/}
-          {/*</Col>*/}
           {
-            data?.aboutUsPage.events.map((item, idx) => {
+            (data) ? data.aboutUsPage.events.map((event, idx) => {
               return (
-                <React.Fragment key={item.title}>
-                  <Col xs={{ span: 12, order: 2 * (1 + idx) }} lg={6}>
-                    <DescriptionTitleContainer>
-                      {item.title}
-                    </DescriptionTitleContainer>
-                    <DescriptionDescContainer>
-                      {item.title_kr} | {renderSince(item.date)} <br/>
-                      {item.description}
-                    </DescriptionDescContainer>
-                  </Col>
-                  <Col xs={{ span: 12, order: 1 + (2 * idx) }} lg={6}>
-                    <img src={item.image.url} alt={item.title} style={{ width: '100%', padding: '7.5%' }}/>
-                  </Col>
-                </React.Fragment>
-              )
-            })
+                renderEvt(idx, event)
+              );
+            }) : [0, 1, 2].map((idx) => renderEvt(idx, undefined, true))
           }
         </Row>
       </DescriptionContainer>

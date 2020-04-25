@@ -59,7 +59,7 @@ export default function Events() {
                   <Skeleton />
                 </div>
                 <div style={{ marginTop: '8px', width: '70%' }}>
-                  <Skeleton></Skeleton>
+                  <Skeleton/>
                 </div>
               </div>
             );
