@@ -21,7 +21,7 @@ export default function () {
       <Route path="/contact">
         <Contact />
       </Route>
-      <Route path='/privacy-policy' component={() => {
+      <Route path='/moin' component={() => {
         window.location.href = 'https://www.canva.com/design/DAD_A2X2iXY/gXB_B9GOFN_HVgS8KQYfyw/view#1';
         return null;
       }}/>
