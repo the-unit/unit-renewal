@@ -44,7 +44,6 @@ function renderTitle(title: string) {
 }
 
 function renderSubTitle(subTitle?: string) {
-  console.log('subTitle is', subTitle);
   if (subTitle === undefined) {
     return (<div/>)
   }
