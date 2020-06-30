@@ -2,8 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import Card from '../../../Components/Card';
-import { Container, Row, Col } from 'react-bootstrap';
-import styled from 'styled-components';
+import { Container, Row } from 'react-bootstrap';
 import CardSkeleton from '../../../Components/CardSkeleton';
 
 interface ILogo {
@@ -52,19 +51,11 @@ function parameterizedQuer(limit: number = 0) {
   `;
 }
 
-
-const PartnerCol = styled(Col)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 191px;
-`;
-
 type IPartners = {
   limit?: number;
 }
 
-const Partners: React.FC<IPartners> = ({children, limit}) => {
+const Partners: React.FC<IPartners> = ({ children, limit }) => {
   const { loading, error, data } = useQuery<IQueryPartners>(parameterizedQuer(limit));
 
   if (loading) return renderLoading();
@@ -75,54 +66,52 @@ const Partners: React.FC<IPartners> = ({children, limit}) => {
       <Row>
         {data?.partners.map(
           ({
-            name,
-            subName,
-            introduction,
-            slogan,
-            establishmentDate,
-            facebook,
-            homepage,
-            location,
-            medium,
-            email,
-            tags,
-            logo,
-          }) => (
-            <PartnerCol key={name} className={'p-0'}>
-              <Card
-                since={establishmentDate}
-                name={name}
-                subName={subName}
-                slogan={slogan}
-                introduction={introduction}
-                homepage={homepage}
-                facebook={facebook}
-                medium={medium}
-              />
-            </PartnerCol>
+             name,
+             subName,
+             introduction,
+             slogan,
+             establishmentDate,
+             facebook,
+             homepage,
+             location,
+             medium,
+             email,
+             tags,
+             logo
+           }) => (
+            <Card
+              since={establishmentDate}
+              name={name}
+              subName={subName}
+              slogan={slogan}
+              introduction={introduction}
+              homepage={homepage}
+              facebook={facebook}
+              medium={medium}
+              key={name}
+            />
           )
         )}
       </Row>
     </Container>
   );
-}
+};
 
 function renderLoading() {
   return (
     <Container>
       <Row>
-        {[0,1,2,3,4,5].map(
+        {[0, 1, 2, 3, 4, 5].map(
           (val, idx) => (
-            <PartnerCol key={val} className={'p-0'}>
-              <CardSkeleton
-                logo={false}
-              />
-            </PartnerCol>
+            <CardSkeleton
+              logo={false}
+              key={`skeleton-${val}`}
+            />
           )
         )}
       </Row>
     </Container>
-  )
+  );
 }
 
 export default Partners;

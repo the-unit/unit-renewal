@@ -1,14 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import Skeleton from 'react-loading-skeleton';
+import { Col } from 'react-bootstrap';
 
 interface ICardContainer {
   logo?: boolean;
 }
 
-const CardContainer = styled.div<ICardContainer>`
+const CardContainer = styled.div`
+  display: flex;
+  min-width: 320px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+`;
+
+const CardInbox = styled.div<ICardContainer>`
+  height: ${(props) => (props.logo ? '224px' : '159px')};
   width: 288px;
-  height: ${(props) => (props.logo ? '263px' : '159px')};
   object-fit: contain;
   border-radius: 8px;
   border: solid 1px #eeeeee;
@@ -28,19 +37,16 @@ const Image = styled.div`
   padding: 10px;
 `;
 
-const CardMiddleContainer = styled.div`
-  display: flex;
-  align-items: center;
+const CardMiddleContainer = styled.div<ICardContainer>`
   margin: 7px 16px 0 16px;
-  height: 60px;
+  height: ${(props) => (props.logo ? '40px' : '60px')};
 `;
 
-const CardBottomContainer = styled.div`
+const CardBottomContainer = styled.div<ICardContainer>`
   display: flex;
   justify-content: flex-end;
-  margin-top: 15px;
+  margin-top: ${(props) => (props.logo ? '2px' : '8px')};
   margin-right: 16px;
-  height: 42px;
 `;
 
 type ICardDescriptionContainer = {
@@ -112,38 +118,42 @@ type ICard = {
 };
 
 const CardSkeleton: React.FC<ICard> = ({
-                                 logo,
-                               }) => {
+                                         logo
+                                       }) => {
   return (
-    <CardContainer logo={logo}>
-      {logo ? (
-        <ImageContainer>
-          <Image>
-            <Skeleton height={100}/>
-          </Image>
-        </ImageContainer>
-      ) : null}
-      <CardTopContainer>
-        <CardTitleContainer>
-          <div style={{ width: '50%'}}>
-            <Skeleton count={1}/>
-          </div>
-        </CardTitleContainer>
-        <CardSinceContainer>
-          <Skeleton count={1}/>
-        </CardSinceContainer>
-      </CardTopContainer>
-      <CardMiddleContainer>
-        <CardDescriptionContainer ellipsisLineCount={logo ? 2 : 3}>
-          <Skeleton count={2}/>
-        </CardDescriptionContainer>
-      </CardMiddleContainer>
-      <CardBottomContainer>
-        {renderBtn()}
-        {renderBtn()}
-        {renderBtn()}
-      </CardBottomContainer>
-    </CardContainer>
+    <Col xs={12} sm={12} md={6} lg={4} xl={4} className={'p-0'}>
+      <CardContainer>
+        <CardInbox logo={logo}>
+          {logo ? (
+            <ImageContainer>
+              <Image>
+                <Skeleton height={100}/>
+              </Image>
+            </ImageContainer>
+          ) : null}
+          <CardTopContainer>
+            <CardTitleContainer>
+              <div style={{ width: '50%' }}>
+                <Skeleton count={1}/>
+              </div>
+            </CardTitleContainer>
+            <CardSinceContainer>
+              <Skeleton count={1}/>
+            </CardSinceContainer>
+          </CardTopContainer>
+          <CardMiddleContainer logo={logo}>
+            <CardDescriptionContainer ellipsisLineCount={logo ? 2 : 3}>
+              <Skeleton count={(logo)? 2:3}/>
+            </CardDescriptionContainer>
+          </CardMiddleContainer>
+          <CardBottomContainer logo={logo}>
+            {renderBtn()}
+            {renderBtn()}
+            {renderBtn()}
+          </CardBottomContainer>
+        </CardInbox>
+      </CardContainer>
+    </Col>
   );
 };
 

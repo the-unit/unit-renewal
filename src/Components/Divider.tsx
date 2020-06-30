@@ -9,6 +9,7 @@ type IDividier = {
 const DividerContainer = styled.div`
   display: flex;
   align-items: center;
+  height: 40px;
 `;
 
 const DividerTextContainer = styled.div`

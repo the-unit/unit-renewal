@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Col } from 'react-bootstrap';
 
 interface ILogo {
   url: string;
@@ -30,17 +31,24 @@ const CardBtnTitle = styled.div`
   margin-right: 15px;
 `;
 
-const CardBottomContainer = styled.div`
+const CardBottomContainer = styled.div<ICardContainer>`
   display: flex;
   justify-content: flex-end;
-  margin-top: 15px;
+  margin-top: ${(props) => (props.logo ? '7px' : '15px')};
   margin-right: 16px;
-  height: 42px;
 `;
 
-const CardContainer = styled.div<ICardContainer>`
+const CardContainer = styled.div`
+  display: flex;
+  min-width: 320px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+`
+
+const CardInbox = styled.div<ICardContainer>`
+  height: ${(props) => (props.logo ? '224px' : '159px')};
   width: 288px;
-  height: ${(props) => (props.logo ? '263px' : '159px')};
   object-fit: contain;
   border-radius: 8px;
   border: solid 1px #eeeeee;
@@ -49,7 +57,7 @@ const CardContainer = styled.div<ICardContainer>`
 const CardTopContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 9px 16px 0 16px;
+  margin: 7px 16px 0 16px;
 `;
 
 const ImageContainer = styled.div``;
@@ -59,11 +67,9 @@ const Image = styled.img`
   height: 104px;
 `;
 
-const CardMiddleContainer = styled.div`
-  display: flex;
-  align-items: center;
+const CardMiddleContainer = styled.div<ICardContainer>`
   margin: 7px 16px 0 16px;
-  height: 60px;
+  height: ${(props) => (props.logo ? '40px' : '60px')};
 `;
 
 type ICardDescriptionContainer = {
@@ -144,29 +150,33 @@ const Card: React.FC<ICard> = ({
   medium,
 }) => {
   return (
-    <CardContainer logo={logo}>
-      {logo ? (
-        <ImageContainer>
-          <Image src={logo.url} alt={'logo'} />
-        </ImageContainer>
-      ) : null}
-      <CardTopContainer>
-        <CardTitleContainer>{name}</CardTitleContainer>
-        <CardSinceContainer>
-          {since ? `since ${getYear(since)}` : null}
-        </CardSinceContainer>
-      </CardTopContainer>
-      <CardMiddleContainer>
-        <CardDescriptionContainer ellipsisLineCount={logo ? 2 : 3}>
-          {introduction}
-        </CardDescriptionContainer>
-      </CardMiddleContainer>
-      <CardBottomContainer>
-        {renderBtn('웹페이지', homepage)}
-        {renderBtn('f', facebook)}
-        {renderBtn('m', medium)}
-      </CardBottomContainer>
-    </CardContainer>
+    <Col xs={12} sm={12} md={6} lg={4} xl={4} className={'p-0'}>
+      <CardContainer>
+        <CardInbox logo={logo}>
+          {logo ? (
+            <ImageContainer>
+              <Image src={logo.url} alt={'logo'} />
+            </ImageContainer>
+          ) : null}
+          <CardTopContainer>
+            <CardTitleContainer>{name}</CardTitleContainer>
+            <CardSinceContainer>
+              {since ? `since ${getYear(since)}` : null}
+            </CardSinceContainer>
+          </CardTopContainer>
+          <CardMiddleContainer logo={logo}>
+            <CardDescriptionContainer ellipsisLineCount={logo ? 2 : 3}>
+              {introduction}
+            </CardDescriptionContainer>
+          </CardMiddleContainer>
+          <CardBottomContainer logo={logo}>
+            {renderBtn('웹페이지', homepage)}
+            {renderBtn('f', facebook)}
+            {renderBtn('m', medium)}
+          </CardBottomContainer>
+        </CardInbox>
+      </CardContainer>
+    </Col>
   );
 };
 

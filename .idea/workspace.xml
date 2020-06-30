@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d42f9861-5c59-4991-8e6e-96e0d82ac9c5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layout/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layout/Content.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CardSkeleton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CardSkeleton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Divider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Divider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/index/partners/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/index/partners/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/index/sponsors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/index/sponsors/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +124,7 @@
       <workItem from="1587821308203" duration="10432000" />
       <workItem from="1587997814380" duration="38000" />
       <workItem from="1592484750163" duration="1651000" />
+      <workItem from="1593526419677" duration="7576000" />
     </task>
     <servers />
   </component>
@@ -183,11 +188,11 @@
       <screen x="0" y="23" width="2560" height="1331" />
     </state>
     <state x="957" y="521" key="com.intellij.ide.util.TipDialog/-1920.23.1920.1057/0.23.2560.1331@0.23.2560.1331" timestamp="1586007966619" />
-    <state x="-1215" y="243" width="651" height="618" key="find.popup" timestamp="1592484876049">
-      <screen x="-1920" y="23" width="1920" height="1057" />
+    <state x="940" y="300" width="680" height="777" key="find.popup" timestamp="1593534177708">
+      <screen x="0" y="23" width="2560" height="1331" />
     </state>
     <state x="-1215" y="244" width="719" height="623" key="find.popup/-1920.23.1920.1057/0.23.2560.1331@-1920.23.1920.1057" timestamp="1587821336734" />
-    <state x="940" y="300" width="680" height="777" key="find.popup/-1920.23.1920.1057/0.23.2560.1331@0.23.2560.1331" timestamp="1587823618897" />
+    <state x="940" y="300" width="680" height="777" key="find.popup/-1920.23.1920.1057/0.23.2560.1331@0.23.2560.1331" timestamp="1593534177708" />
     <state x="-1215" y="243" width="651" height="618" key="find.popup/-1920.23.1920.1057/0.23.2560.1332@-1920.23.1920.1057" timestamp="1592484876049" />
     <state x="617" y="220" width="629" height="552" key="find.popup/0.23.1680.945@0.23.1680.945" timestamp="1586590310444" />
     <state x="617" y="221" width="629" height="554" key="find.popup/0.23.1680.948@0.23.1680.948" timestamp="1586672905938" />
@@ -197,11 +202,11 @@
       <screen x="0" y="23" width="2560" height="1331" />
     </state>
     <state x="647" y="287" key="new project wizard/-1920.23.1920.1057/0.23.2560.1331@0.23.2560.1331" timestamp="1587997850174" />
-    <state x="945" y="326" width="670" height="676" key="search.everywhere.popup" timestamp="1587831323392">
+    <state x="945" y="326" width="670" height="676" key="search.everywhere.popup" timestamp="1593534350560">
       <screen x="0" y="23" width="2560" height="1331" />
     </state>
     <state x="-1211" y="264" width="766" height="538" key="search.everywhere.popup/-1920.23.1920.1057/0.23.2560.1331@-1920.23.1920.1057" timestamp="1587049070703" />
-    <state x="945" y="326" width="670" height="676" key="search.everywhere.popup/-1920.23.1920.1057/0.23.2560.1331@0.23.2560.1331" timestamp="1587831323392" />
+    <state x="945" y="326" width="670" height="676" key="search.everywhere.popup/-1920.23.1920.1057/0.23.2560.1331@0.23.2560.1331" timestamp="1593534350560" />
     <state x="620" y="239" width="670" height="482" key="search.everywhere.popup/0.23.1680.948@0.23.1680.948" timestamp="1586674409586" />
     <state x="620" y="240" width="670" height="485" key="search.everywhere.popup/0.23.1680.953@0.23.1680.953" timestamp="1586600551644" />
     <state x="1010" y="532" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1587822101604">

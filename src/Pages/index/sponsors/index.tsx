@@ -2,8 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import Card from '../../../Components/Card';
-import styled from 'styled-components';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import CardSkeleton from '../../../Components/CardSkeleton';
 
 interface ILogo {
@@ -49,18 +48,11 @@ function parameterizedQuery(limit: number = 0) {
   `;
 }
 
-const SponsorCol = styled(Col)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 295px;
-`;
-
 type ISponsors = {
   limit?: number;
 }
 
-const Sponsors: React.FC<ISponsors> = ({children, limit}) => {
+const Sponsors: React.FC<ISponsors> = ({ children, limit }) => {
   const { loading, error, data } = useQuery<IQuerySponsors>(parameterizedQuery(limit));
 
   if (loading) return renderLoading();
@@ -71,54 +63,49 @@ const Sponsors: React.FC<ISponsors> = ({children, limit}) => {
       <Row>
         {data?.sponsors.map(
           ({
-            name,
-            subName,
-            introduction,
-            slogan,
-            establishmentDate,
-            homepage,
-            location,
-            email,
-            tags,
-            logo,
-          }) => (
-            <SponsorCol
+             name,
+             subName,
+             introduction,
+             slogan,
+             establishmentDate,
+             homepage,
+             location,
+             email,
+             tags,
+             logo
+           }) => (
+            <Card
+              since={establishmentDate}
+              name={name}
+              subName={subName}
+              slogan={slogan}
+              introduction={introduction}
+              logo={logo}
+              homepage={homepage}
               key={name}
-              className={'p-0'}
-            >
-              <Card
-                since={establishmentDate}
-                name={name}
-                subName={subName}
-                slogan={slogan}
-                introduction={introduction}
-                logo={logo}
-                homepage={homepage}
-              />
-            </SponsorCol>
+            />
           )
         )}
       </Row>
     </Container>
   );
-}
+};
 
 function renderLoading() {
   return (
     <Container>
       <Row>
-        {[0,1,2,3,4,5].map(
+        {[0, 1, 2, 3, 4, 5].map(
           (val, idx) => (
-            <SponsorCol key={val} className={'p-0'}>
-              <CardSkeleton
-                logo={true}
-              />
-            </SponsorCol>
+            <CardSkeleton
+              logo={true}
+              key={`skeleton-${val}`}
+            />
           )
         )}
       </Row>
     </Container>
-  )
+  );
 }
 
 export default Sponsors;
