@@ -35,7 +35,7 @@ export default function () {
           <FooterTextContainer>
             <div>Design by QURIAN, Philographer</div>
             <ResponsiveTextContainer>
-              infra@unit.center
+              hq@unit.center
             </ResponsiveTextContainer>
           </FooterTextContainer>
         </Col>
@@ -69,7 +69,7 @@ export default function () {
               Design by QURIAN, Philographer
             </ResponsiveTextContainer>
             <ResponsiveTextContainer>
-              infra@unit.center
+              hq@unit.center
             </ResponsiveTextContainer>
             <ResponsiveTextContainer>
               Copyright © UNIT 2020
