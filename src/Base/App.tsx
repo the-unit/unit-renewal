@@ -5,12 +5,13 @@ import Footer from '../Layout/Footer';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import Content from '../Layout/Content';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import API from '../Global/api';
 
 const client = new ApolloClient({
   uri: `${API.END_POINT}/graphql`,
+  cache: new InMemoryCache()
 });
 
 const FlexContainer = styled.div`
